@@ -15,6 +15,5 @@ public class ViewDragHelperActivity extends BaseActivity {
     }
 
     private void initView() {
-
     }
 }
