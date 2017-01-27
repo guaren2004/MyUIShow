@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!--corners标签: 圆角-->
+    <!--bottomLeftRadius 左下角-->
+    <!--bottomRightRadius 右下角-->
+    <!--topLeftRadius 左上角-->
+    <!--topRightRadius 右上角-->
+    <!--radius 是四个角,优先级低于上面四个-->
+    <corners
+        android:bottomLeftRadius="16dp"
+        android:bottomRightRadius="16dp"/>
+
+    <!--gradient标签: 简单的说: 让图形变成一个有颜色梯度的-->
+    <!--angle 是颜色变换的角度,默认是0,取值必须是45的倍数.
+    0: 是颜色从左边到右边, 90: 是颜色从底部到顶部,总之就是逆时针旋转 -->
+    <!--startColor centerColor endColor 一起使用: 开始的颜色, 中间的颜色, 结束的颜色-->
+    <!--centerX centerY是指定位置坐标, 取值是0.0f ~ 1.0f 之间, 例如: android:centerX="0.5f"  表示X方向的中间位置-->
+    <!--type 颜色渐变的类型, 取值类型有三种: linear/radial/sweep  -->
+    <!--linear 线性变化, 就是颜色从左往右, 从下往上-->
+    <!--radial 放射变化, 例如: 从一个圆中心到圆的边缘变化,必须和 gradientRadius 属性一起用-->
+    <!--sweep 扫描式渐变, 类似雷达扫描的那种图形-->
+    <!--gradientRadius 和android:type="radial"一起连用, 半径-->
+    <gradient
+        android:angle="225"
+        android:endColor="@color/colorAccent"
+        android:centerColor="@color/colorPrimaryDark"
+        android:startColor="#61df1d"
+        android:type="linear"/>
+
+    <!--solid标签: 背景色,和 gradient 标签冲突-->
+    <!--<solid-->
+    <!--android:color="#0fc7ff"/>-->
+
+    <!--stroke标签: 边框-->
+    <!--width 边框的宽度-->
+    <!--color 边框的颜色-->
+    <!--下面两个参数是 把边框变成虚线用-->
+    <!--dashGap 虚线中空格的长度-->
+    <!--dashWidth 虚线中实线的长度-->
+    <stroke
+        android:color="@color/colorBlack"
+        android:width="5dp"
+        android:dashGap="3dp"
+        android:dashWidth="5dp"/>
+
+</shape>

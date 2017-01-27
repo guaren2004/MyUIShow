@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--android:fitsSystemWindows="true": 这个属性一般用于根布局-->
+<!--使用这个属性后,NavigationView 的视图就深入到了状态栏,需要设置状态栏为透明-->
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/activity_navigation_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/planet"
+    tools:context="com.example.robin.coordinatorlayouttest.activity.NavigationViewActivity"
+    tools:openDrawer="start">
+
+    <!--DrawerLayout 的主界面,没有 layout_gravity 属性-->
+    <!--如果 DrawerLayout 布局加入沉浸状态栏,需要在主内容布局加上 paddingTop属性-->
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            app:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_nav"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_nav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="center"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager_nav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--如果在这里设置 scrollBars="none" 是无法去掉滑动条的-->
+    <!--因为这个滑动条并不是 NavigationView 的,而是在他的 child: NavigationMenuView 中-->
+    <!--需要在代码中设置-->
+    <!--app:itemBackground: 所有 item 的背景-->
+    <!--app:itemIconTint: 所有 item 的图标颜色-->
+    <!--app:itemTextColor: 所有 item 的字体颜色-->
+    <!--如果要设置 item 被选中后的颜色背景变化需要在代码中设置-->
+    <!--背景: NavigationView 的背景可在 style 中添加 android:windowBackground 设置-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header_nav"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorWhite"
+        app:menu="@menu/menu_nav_sliding"/>
+
+</android.support.v4.widget.DrawerLayout>

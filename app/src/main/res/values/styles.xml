@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <!--colorPrimary: android.support.design.widget.AppBarLayout的背景色-->
+        <!--colorPrimaryDark: 设置状态栏的颜色-->
+        <!--colorAccent: android.support.design.widget.FloatingActionButton以及TabLayout指示条,SnackBar等等的的颜色-->
+        <!--android:windowBackground: 如果设置这个属性,应用启动的背景和 NavigationView 的背景色将变成这个背景,本例写到了 NavigationView 所在的 Activity 中-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:windowBackground">@android:color/darker_gray</item>-->
+    </style>
+
+    <!--SliderActivity和Tabs都使用了ToolBar,这里的windowActionBar设置为了false,windowNoTitle设置成了true-->
+    <!--没有ActionBar和Title,都用ToolBar来设置-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!--android:windowBackground: 专门另外写一个 style 来设置 NavigationView 所在 Activity 的背景,也就是 NavigationView 的背景-->
+    <style name="AppTheme.NoActionBarForNavBG">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@mipmap/planet</item>
+    </style>
+
+    <!--设置 LauncherActivity 全屏,以解决应用启动白色背景问题-->
+    <!--注意: -->
+    <!--1. 单独设置 <item name="android:windowFullscreen">true</item> 还是会有标题栏,必须加上 <item name="windowNoTitle">true</item>-->
+    <!--2. 设置 android:windowBackground 作为 LauncherActivity 的窗口背景-->
+    <!--3. 如果 LauncherActivity 的布局中也只是一个张和这个一样的图片,那么 LauncherActivity 中的 setContentView 方法都可以去掉-->
+    <style name="AppTheme.FullScreenForLauncher">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@mipmap/baby</item>
+    </style>
+
+    <style name="AppTheme.FullScreen">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--android.support.design.widget.AppBarLayout的theme-->
+    <!--parent="ThemeOverlay.AppCompat.Dark: 在AppBarLayout中包含了ToolBar和TabLayout-->
+    <!--设置成Dark: ToolBar中定义的Button背景色是黑色,字是白色...TabLayout的tab文字颜色是白色-->
+    <!--设置成Light: ToolBar中定义的Button背景色是白色,字是黑色...TabLayout的tab文字颜色是黑色-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
+
+    <!--android.support.v7.widget.Toolbar的theme-->
+    <!--parent="ThemeOverlay.AppCompat.Light: 点击menu菜单的overflow出来的背景色和文字颜色-->
+    <!--如果设置成Light: 背景白色,文字黑色-->
+    <!--如果设置成Dark: 背景黑色,文字白色-->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+</resources>

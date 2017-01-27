@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.example.robin.coordinatorlayouttest"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- LauncherActivity -->
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:theme="@style/AppTheme.FullScreenForLauncher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!--GuideActivity-->
+        <activity
+            android:name=".activity.GuideActivity"
+            android:theme="@style/AppTheme.FullScreen">
+
+        </activity>
+
+        <!-- MainActivity -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <!-- BaseActivity -->
+        <activity android:name=".activity.BaseActivity">
+        </activity>
+
+        <!-- BottomActivity -->
+        <activity
+            android:name=".activity.BottomActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <!-- SlidingActivity -->
+        <activity
+            android:name=".activity.SlidingActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <!-- NavigationViewActivity -->
+        <activity
+            android:name=".activity.NavigationViewActivity"
+            android:theme="@style/AppTheme.NoActionBarForNavBG">
+        </activity>
+
+        <!-- Main3Activity -->
+        <activity
+            android:name=".activity.Main3Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <!-- ViewDragHelperActivity -->
+        <activity
+            android:name=".activity.ViewDragHelperActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>

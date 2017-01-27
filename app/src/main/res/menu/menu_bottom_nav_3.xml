@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--BottomNavigationView 的 item 菜单-->
+    <item
+        android:id="@+id/home"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="首页"/>
+    <item
+        android:id="@+id/discovery"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="发现"/>
+    <item
+        android:id="@+id/msg"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="消息"/>
+    <item
+        android:id="@+id/mine"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:title="我的"/>
+</menu>

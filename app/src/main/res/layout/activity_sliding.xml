@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/stars"
+    tools:context="com.example.robin.coordinatorlayouttest.activity.SlidingActivity"
+    tools:openDrawer="start">
+
+    <!--DrawerLayout 的主界面,没有 layout_gravity 属性-->
+    <!--如果 DrawerLayout 布局加入沉浸状态栏,需要在主内容布局加上 paddingTop属性-->
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            app:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_sliding"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_sliding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="center"/>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager_sliding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--DrawerLayout 的侧滑界面-->
+    <!--1. 有 layout_gravity 属性, start 代表从左边滑入-->
+    <!--2. clickable属性: 写了这个属性为 true,就不能从滑入的界面点击到主界面的控件-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@mipmap/beautiful"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_left1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="111"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="222"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="333"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="444"/>
+
+
+    </LinearLayout>
+
+    <!--android:layout_gravity="end": 表示可以从右边滑入-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@android:color/darker_gray"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="111"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="222"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="333"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/ic_launcher"
+            android:drawableStart="@mipmap/ic_launcher"
+            android:gravity="center_vertical"
+            android:text="444"/>
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--注意: 这里在 GridLayout 外部又包裹了一个布局-->
+<!--原因: 在模拟器上测试单独使用 GridLayout 作为最外部布局在5.0版本会有一点控件不对齐的问题-->
+<!--如果设置了 background,那么控件的背景颜色就会直接修改-->
+<!--如果设置了 backgroundTint,那么就会将设置的颜色和原来的背景进行一个叠加的过程,
+至于如何叠加，就是 backgroundTintMode 属性设置的-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <!--1.android:columnCount="3"：3列-->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:columnCount="3"
+        android:padding="8dp">
+
+        <!--backgroundTint: 设置背景色调,不改变控件外形-->
+        <!--2.android:layout_column="2"：从第三列开始（3为下标，0123）-->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_column="2"
+            android:backgroundTint="@color/colorAccent"
+            android:text="//"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="1"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="2"/>
+
+        <!--background: 设置整个背景-->
+        <android.support.v7.widget.AppCompatButton
+            android:background="@color/colorAccent"
+            android:text="3"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="*"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="4"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="5"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="6"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="-"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="7"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="8"/>
+
+        <android.support.v7.widget.AppCompatButton android:text="9"/>
+
+        <!--layout_rowSpan: 占多少行-->
+        <!--layout_gravity="fill_vertical": 纵向填充-->
+        <!--两个属性配合使用-->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_gravity="fill_vertical"
+            android:layout_rowSpan="3"
+            android:text="+"/>
+
+        <!--layout_columnSpan: 占多少列-->
+        <!--layout_gravity="fill_horizontal": 横向填充-->
+        <!--两个属性配合使用-->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill_horizontal"
+            android:backgroundTint="@color/colorAccentTranslucent"
+            android:text="0"/>
+
+        <!--background: 设置透明,整个背景都没了-->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_columnSpan="2"
+            android:layout_gravity="fill_horizontal"
+            android:background="@color/colorTransparent"
+            android:text="00"/>
+
+        <!--backgroundTint: 设置透明,虽然透明,但是外形还在-->
+        <android.support.v7.widget.AppCompatButton
+            android:layout_columnSpan="3"
+            android:layout_gravity="fill_horizontal"
+            android:backgroundTint="@color/colorTransparent"
+            android:text="="/>
+    </GridLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#42b5b3"
+        android:text="跳转到 ViewDragHelperActivity"
+        android:textAllCaps="false"/>
+</RelativeLayout>

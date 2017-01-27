@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--item + menu + item: 会被一条线隔开(比如最后四个 item)-->
+    <!--title="操作"这个 item 只需要一个 title 就可以了,只用于显示"操作"这个标题-->
+    <!--前三个普通 item 如果需要用横线隔开,需要添加 group 标签并且设置一个 id-->
+    <!--checkableBehavior="single": 单选-->
+    <!--checkableBehavior="all": 多选-->
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/sliding1"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="菜单1"/>
+        <item
+            android:id="@+id/sliding2"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="菜单2"/>
+    </group>
+    <item
+        android:id="@+id/sliding3"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        android:title="菜单3"/>
+
+    <item android:title="操作">
+        <menu>
+            <item
+                android:id="@+id/action_setting1"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="添加"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_setting2"
+                android:icon="@android:drawable/ic_delete"
+                android:title="删除"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_setting3"
+                android:icon="@android:drawable/alert_light_frame"
+                android:title="修改"
+                app:showAsAction="ifRoom"/>
+            <item
+                android:id="@+id/action_setting4"
+                android:icon="@android:drawable/ic_dialog_alert"
+                android:title="更新所有数据"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+
+
+</menu>

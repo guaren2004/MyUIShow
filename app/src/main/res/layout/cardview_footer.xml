@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+app:cardBackgroundColor - 这是设置背景颜色
+app:cardCornerRadius - 这是设置圆角大小
+app:cardElevation - 这是设置z轴的阴影
+app:cardMaxElevation - 这是设置z轴的最大高度值
+app:cardUseCompatPadding - 是否使用CompatPadding
+app:cardPreventCornerOverlap - 是否使用PreventCornerOverlap
+app:contentPadding - 设置内容的padding
+app:contentPaddingLeft - 设置内容的左padding
+app:contentPaddingTop - 设置内容的上padding
+app:contentPaddingRight - 设置内容的右padding
+app:contentPaddingBottom - 设置内容的底padding
+-->
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textFooter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="CardView"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

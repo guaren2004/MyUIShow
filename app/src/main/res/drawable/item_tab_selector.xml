@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--drawable 选择器要创建在 res 的 drawable 目录下-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorTransparent" android:state_pressed="true"/>
+    <item android:drawable="@color/colorTransparent" android:state_focused="true"/>
+    <item android:drawable="@color/colorTransparent" android:state_checked="true"/>
+    <item android:drawable="@color/colorTransparent" android:state_selected="true"/>
+    <item android:drawable="@android:color/holo_blue_dark"/>
+</selector>

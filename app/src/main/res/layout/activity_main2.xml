@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/beautiful"
+    android:orientation="vertical"
+    tools:context="com.example.robin.coordinatorlayouttest.activity.MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--设置Toolbar图片伸缩效果: -->
+        <!--1. 把ImageView和Toolbar包裹在CollapsingToolbarLayout中-->
+        <!--2. 再把CollapsingToolbarLayout和TabLayout包裹在AppBarLayout中-->
+        <!--app:elevation="0dp": 去掉5.0版本上默认的控件海拔(高度/阴影)-->
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            app:elevation="0dp"
+            app:theme="@style/AppTheme.AppBarOverlay">
+
+            <!--app:contentScrim: 设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色-->
+            <!--app:expandedTitleMarginStart: 设置扩张时候(还没有收缩时)title向左填充的距离-->
+            <!--当用CollapsingToolbarLayout包裹了Toolbar后
+            layout_scrollFlags属性就写到了CollapsingToolbarLayout中-->
+            <!--app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed"-->
+            <!--scroll|enterAlwaysCollapsed|exitUntilCollapsed:
+            效果其实和scroll|exitUntilCollapsed是一样的,中间的enterAlwaysCollapsed可以省略
+            1. scroll: 可以滑动
+            2. enterAlwaysCollapsed: 滑到顶端的时候继续下拉才能伸展
+            3. exitUntilCollapsed: ImageView收缩完毕后,Toolbar那一块空间固定在顶端,没有隐藏
+            注意这里是空间,至于logo和OverFlow和是否隐藏要看Toolbar的layout_collapseMode属性-->
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="@android:color/holo_blue_dark"
+                app:expandedTitleGravity="bottom|center_horizontal"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <!--app:layout_collapseMode: (折叠模式)表示图片滑动速度与折叠滑动速度的比
+                有两个值-->
+                <!--pin: (不写就默认这个属性)完全跟随折叠收缩滑动速度-->
+                <!--parallax: 如果不写layout_collapseParallaxMultiplier,那默认就是0.5
+                通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用-->
+                <!--app:layout_collapseParallaxMultiplier: 设置视差滚动因子,值为0~1-->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/car"
+                    app:layout_collapseMode="parallax"/>
+
+                <!--Toolbar中的app:layout_collapseMode: 有两个属性-->
+                <!--parallax:
+                (不写就默认这个属性,且layout_collapseParallaxMultiplier值为0.5)
+                表示Toolbar的子view比如logo, OverFlow等都会随着ImageView上滑而上滑从而隐藏起来
+                注意这里的Title已经不是Toolbar来设置了,Title属于CollapsingToolbarLayout
+                如果要设置滑动的速度比,可以设置layout_collapseParallaxMultiplier属性
+                进行配合,layout_collapseParallaxMultiplier属性的值0 ~ 1,速度从大到小
+                当设置成 1 速度最小的时候其实和直接设置成pin是一样的,不会滑动-->
+                <!--pin: 不会随着ImageView上滑而上滑,在ImageView还没有完全收缩之前
+                是一只固定在顶部的,是否隐藏是与layout_scrollFlags属性有关-->
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <!--设置了一个线性布局,添加一个 TextView 在 TabLayout 后面-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--两个关键属性: app:tabGravity 和 app:tabMode-->
+                <!--app:tabGravity: app:tabGravity="center" 和 app:tabGravity="fill" 两种-->
+                <!--app:tabMode: app:tabMode="scrollable" 和 app:tabMode="fixed" 两种-->
+                <!--这两个属性互相搭配可以控制TabLayout中的tabText(文字)与tabIndicator(tab条)布局分布-->
+
+                <!--布局技巧: 效果是tabIndicator不是在文字下面滑动,而是作为了文字背景滑动-->
+                <!--1. app:tabIndicatorHeight: 设置高一点,占满TabLayout高度-->
+                <!--2. app:tabIndicatorColor: 设置颜色的前面加上透明效果的数字-->
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:tabBackground="@drawable/item_tab_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorColor="@color/colorTransparent"
+                    app:tabIndicatorHeight="100dp"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@android:color/darker_gray"/>
+
+                <TextView
+                    android:id="@+id/tv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="更多"
+                    android:textColor="@android:color/white"/>
+
+            </LinearLayout>
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@android:drawable/ic_dialog_email"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>
+

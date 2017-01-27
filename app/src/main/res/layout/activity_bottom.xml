@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/beautiful"
+    android:orientation="vertical"
+    tools:context="com.example.robin.coordinatorlayouttest.activity.BottomActivity">
+
+    <!--用于响应 BottomNavigationView 中各个 item 的点击事件, 加入或者切换不用的 Fragment-->
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!--app:menu - 设置 item 对应的菜单,菜单的 title 和 icon 就是这里 item 的文字和图标-->
+    <!--app:itemIconTint - 设置图标颜色,可以使用一个 color 选择器-->
+    <!--app:itemTextColor - 设置文字颜色,可以使用一个 color 选择器-->
+    <!--app:itemBackground - 设置每个 item 背景,可以使用一个 drawable 选择器-->
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:itemBackground="@drawable/item_bottom_nav_selector"
+        app:itemIconTint="@color/selector"
+        app:itemTextColor="@color/selector"
+        app:menu="@menu/menu_bottom_nav_3"/>
+</LinearLayout>
