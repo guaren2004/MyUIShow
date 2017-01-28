@@ -19,6 +19,8 @@ CollapsingToolbarLayout + ImageView + Toolbar 的页面
 
 以及
 
+沉浸式状态栏开发
+
 Fragment 中菜单的开发
 
 BaseFragment 的封装以及懒加载的实现
