@@ -8,6 +8,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp">
@@ -22,40 +23,40 @@
 
         <!--backgroundTint: 设置背景色调,不改变控件外形-->
         <!--2.android:layout_column="2"：从第三列开始（3为下标，0123）-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_column="2"
-            android:backgroundTint="@color/colorAccent"
-            android:text="//"/>
+            android:text="//"
+            app:backgroundTint="@color/colorAccent"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="1"/>
+        <Button android:text="1"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="2"/>
+        <Button android:text="2"/>
 
         <!--background: 设置整个背景-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:background="@color/colorAccent"
             android:text="3"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="*"/>
+        <Button android:text="*"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="4"/>
+        <Button android:text="4"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="5"/>
+        <Button android:text="5"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="6"/>
+        <Button android:text="6"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="-"/>
+        <Button android:text="-"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="7"/>
+        <Button android:text="7"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="8"/>
+        <Button android:text="8"/>
 
-        <android.support.v7.widget.AppCompatButton android:text="9"/>
+        <Button android:text="9"/>
 
         <!--layout_rowSpan: 占多少行-->
         <!--layout_gravity="fill_vertical": 纵向填充-->
         <!--两个属性配合使用-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_gravity="fill_vertical"
             android:layout_rowSpan="3"
             android:text="+"/>
@@ -63,33 +64,33 @@
         <!--layout_columnSpan: 占多少列-->
         <!--layout_gravity="fill_horizontal": 横向填充-->
         <!--两个属性配合使用-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
-            android:backgroundTint="@color/colorAccentTranslucent"
-            android:text="0"/>
+            android:text="0"
+            app:backgroundTint="@color/colorAccentTranslucent"/>
 
         <!--background: 设置透明,整个背景都没了-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
             android:background="@color/colorTransparent"
             android:text="00"/>
 
         <!--backgroundTint: 设置透明,虽然透明,但是外形还在-->
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_columnSpan="3"
             android:layout_gravity="fill_horizontal"
-            android:backgroundTint="@color/colorTransparent"
-            android:text="="/>
+            android:text="="
+            app:backgroundTint="@color/colorTransparent"/>
     </GridLayout>
 
-    <android.support.v7.widget.AppCompatButton
+    <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#42b5b3"
         android:text="跳转到 ViewDragHelperActivity"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        app:backgroundTint="#42b5b3"/>
 </RelativeLayout>
