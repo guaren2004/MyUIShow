@@ -76,7 +76,7 @@ public class Util {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // 设置了这个 flag,drawerLayout 下面的主内容布局的 paddingTop 属性才有用
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); // 只加这个flag是半透明效果
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); // 加这个flag是半透明效果,所以要去掉
             // 下面两个 Flag 一起使用才能使 5.0(21) 及以上版本带有 DrawerLayout 的状态栏完全透明,并且侧边栏也延伸到了状态栏中
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
