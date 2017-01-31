@@ -17,6 +17,10 @@ import com.example.robin.coordinatorlayouttest.utils.Util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 带底部导航栏的页面
+ * BottomNavigationView 开发
+ */
 public class BottomActivity extends BaseActivity {
 
     private FragmentManager fragmentManager;

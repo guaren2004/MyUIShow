@@ -27,6 +27,10 @@ import com.example.robin.coordinatorlayouttest.fragment.Fragment3;
 import com.example.robin.coordinatorlayouttest.fragment.Fragment4;
 import com.example.robin.coordinatorlayouttest.utils.Util;
 
+/**
+ * 侧边导航栏页面(Google 标准开发)
+ * NavigationView 开发
+ */
 public class NavigationViewActivity extends BaseActivity {
 
     private DrawerLayout drawerLayout;

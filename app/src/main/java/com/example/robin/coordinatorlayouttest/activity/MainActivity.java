@@ -27,7 +27,9 @@ import com.example.robin.coordinatorlayouttest.fragment.Fragment5;
 import com.example.robin.coordinatorlayouttest.fragment.Fragment6;
 import com.example.robin.coordinatorlayouttest.utils.Util;
 
-
+/**
+ * 主页面
+ */
 public class MainActivity extends BaseActivity {
 
     private long time = 0;

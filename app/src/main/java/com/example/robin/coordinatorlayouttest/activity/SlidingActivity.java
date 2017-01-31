@@ -20,6 +20,9 @@ import com.example.robin.coordinatorlayouttest.fragment.Fragment4;
 import com.example.robin.coordinatorlayouttest.fragment.Fragment5;
 import com.example.robin.coordinatorlayouttest.utils.Util;
 
+/**
+ * 侧边导航栏页面(自定义侧边导航栏)
+ */
 public class SlidingActivity extends BaseActivity {
 
     private DrawerLayout drawerLayout;
