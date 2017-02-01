@@ -1,6 +1,11 @@
 package com.example.robin.coordinatorlayouttest.fragment;
 
 import com.example.robin.coordinatorlayouttest.R;
+import com.example.robin.coordinatorlayouttest.engin.OkHttpClientManager;
+
+import java.io.IOException;
+
+import okhttp3.Response;
 
 
 public class Fragment3 extends BaseFragment {
@@ -21,5 +26,10 @@ public class Fragment3 extends BaseFragment {
     @Override
     protected void initData() {
         System.out.println(TAG + "initData");
+        try {
+            final Response response = OkHttpClientManager.getAsync("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
