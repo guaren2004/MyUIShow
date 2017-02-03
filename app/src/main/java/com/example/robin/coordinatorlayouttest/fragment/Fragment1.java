@@ -96,7 +96,6 @@ import java.util.List;
 public class Fragment1 extends BaseFragment {
 
     private List<String> datas;
-    private static final String TAG = "Fragment1: ";
     private RecyclerViewAdapter recyclerViewAdapter;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;

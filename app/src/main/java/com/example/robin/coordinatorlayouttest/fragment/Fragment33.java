@@ -10,8 +10,6 @@ import com.example.robin.coordinatorlayouttest.R;
 
 public class Fragment33 extends BaseFragment {
 
-    private static final String TAG = "Fragment33 - ";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         System.out.println(TAG + "onCreateView");

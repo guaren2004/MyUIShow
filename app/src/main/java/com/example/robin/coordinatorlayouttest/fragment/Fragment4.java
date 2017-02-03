@@ -5,8 +5,6 @@ import com.example.robin.coordinatorlayouttest.R;
 
 public class Fragment4 extends BaseFragment {
 
-    private static final String TAG = "Fragment4: ";
-
     @Override
     protected int getLayoutID() {
         return R.layout.fragment_4;

@@ -35,7 +35,6 @@ public class Fragment2 extends BaseFragment {
     private Thread mThread;
     private List<String> datas2;
     private List<String> datas3;
-    private static final String TAG = "Fragment2: ";
     private RecyclerViewLoadMoreAdapter recyclerViewAdapter2;
     private RecyclerViewAdapter recyclerViewAdapter3;
     private RecyclerView recyclerView2;

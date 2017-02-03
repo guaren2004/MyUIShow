@@ -19,7 +19,7 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
 
-    private static final String TAG = "BaseFragment - ";
+    protected final String TAG = this.getClass().getSimpleName() + " - ";
 
     private boolean isVisible = false; // 当前 Fragment 是否可见
     private boolean isInitView = false; // 是否与 View 建立映射关系(是否初始化)

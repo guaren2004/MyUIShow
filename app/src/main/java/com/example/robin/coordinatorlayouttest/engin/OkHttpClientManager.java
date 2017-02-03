@@ -177,6 +177,7 @@ public class OkHttpClientManager {
 
     /**
      * 异步下载文件
+     *
      * @param destFileDir 本地文件存储的文件夹
      */
     private void _downloadAsync(final String url, final String destFileDir, final ResultCallback callback) {
@@ -341,7 +342,6 @@ public class OkHttpClientManager {
         return getInstance()._getAsync(url);
     }
 
-
     public static String getAsString(String url) throws IOException {
         return getInstance()._getAsString(url);
     }
@@ -362,11 +362,9 @@ public class OkHttpClientManager {
         getInstance()._postAsyn(url, callback, params);
     }
 
-
     public static void postAsyn(String url, final ResultCallback callback, Map<String, String> params) {
         getInstance()._postAsyn(url, callback, params);
     }
-
 
     public static Response post(String url, File[] files, String[] fileKeys, Param... params) throws IOException {
         return getInstance()._post(url, files, fileKeys, params);
@@ -384,11 +382,9 @@ public class OkHttpClientManager {
         getInstance()._postAsyn(url, callback, files, fileKeys, params);
     }
 
-
     public static void postAsyn(String url, ResultCallback callback, File file, String fileKey) throws IOException {
         getInstance()._postAsyn(url, callback, file, fileKey);
     }
-
 
     public static void postAsyn(String url, ResultCallback callback, File file, String fileKey, Param... params) throws IOException {
         getInstance()._postAsyn(url, callback, file, fileKey, params);
@@ -524,12 +520,12 @@ public class OkHttpClientManager {
         });
     }
 
-    private void sendSuccessResultCallback(final Object object, final ResultCallback callback) {
+    private void sendSuccessResultCallback(final Object o, final ResultCallback callback) {
         mDelivery.post(new Runnable() {
             @Override
             public void run() {
                 if (callback != null) {
-                    callback.onResponse(object);
+                    callback.onResponse(o);
                 }
             }
         });
@@ -569,7 +565,7 @@ public class OkHttpClientManager {
 
         abstract void onError(Request request, Exception e);
 
-        abstract void onResponse(T response);
+        abstract void onResponse(Object o);
     }
 
     private static class Param {
