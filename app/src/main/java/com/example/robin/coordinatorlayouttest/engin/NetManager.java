@@ -21,7 +21,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- *
+ * 封装 OkHttp 的类
  */
 public class NetManager {
 
@@ -178,16 +178,18 @@ public class NetManager {
 
     /**
      * 当访问网络成功的时候(响应码 response.code() 在 [200..300) ), 利用 Handler.post(Runnable r) 将处理代码转至主线程的方法
+     * 注意: 这个方法的返回值前, 单独申明了一个泛型, 并且后面的 BaseCallback<T> 也加上了泛型, 并且泛型一样
+     * 解决了一个警告: UnChecked call to "......" as member of the raw type
      *
      * @param call         OkHttp 的 call 对象, 可以从中获取和处理一些关于 request 的事情
      * @param response     访问成功获得响应对象, 可以从中获取响应头或响应体, 响应码
      * @param baseCallback 基本回调类
      */
-    private void toMainThreadOnSuccessful(final Call call, final Response response, final Object object, final BaseCallback baseCallback) {
+    private <T> void toMainThreadOnSuccessful(final Call call, final Response response, final T t, final BaseCallback<T> baseCallback) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                baseCallback.onSuccess(call, response, object);
+                baseCallback.onSuccess(call, response, t);
             }
         });
     }
