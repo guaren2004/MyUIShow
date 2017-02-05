@@ -5,10 +5,13 @@ import android.os.Looper;
 import android.widget.ImageView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.google.gson.internal.$Gson$Types;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.FileNameMap;
@@ -69,7 +72,6 @@ public class OkHttpClientManager {
                 .url(url)
                 .build();
         Call call = mOkHttpClient.newCall(request);
-//        Response execute = call.execute();
         return call.execute();
     }
 
@@ -186,67 +188,50 @@ public class OkHttpClientManager {
                 .build();
         final Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
 
+            @Override
+            public void onFailure(final Call call, final IOException e) {
+                sendFailedStringCallback(call, e, callback);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) {
+                InputStream is = null;
+                byte[] buf = new byte[2048];
+                int len = 0;
+                FileOutputStream fos = null;
+                try {
+                    is = response.body().byteStream();
+                    File file = new File(destFileDir, getFileName(url));
+                    fos = new FileOutputStream(file);
+                    while ((len = is.read(buf)) != -1) {
+                        fos.write(buf, 0, len);
+                    }
+                    fos.flush();
+                    //如果下载文件成功，第一个参数为文件的绝对路径
+                    sendSuccessResultCallback(file.getAbsolutePath(), callback);
+                } catch (IOException e) {
+                    sendFailedStringCallback(call, e, callback);
+                } finally {
+                    try {
+                        if (is != null)
+                            is.close();
+                    } catch (IOException e) {
+                    }
+                    try {
+                        if (fos != null)
+                            fos.close();
+                    } catch (IOException e) {
+                    }
+                }
 
             }
-
-//            @Override
-//            public void onFailure(final Request request, final IOException e)
-//            {
-//                sendFailedStringCallback(request, e, callback);
-//            }
-
-//            @Override
-//            public void onResponse(Call call, Response response)
-//            {
-//                InputStream is = null;
-//                byte[] buf = new byte[2048];
-//                int len = 0;
-//                FileOutputStream fos = null;
-//                try
-//                {
-//                    is = response.body().byteStream();
-//                    File file = new File(destFileDir, getFileName(url));
-//                    fos = new FileOutputStream(file);
-//                    while ((len = is.read(buf)) != -1)
-//                    {
-//                        fos.write(buf, 0, len);
-//                    }
-//                    fos.flush();
-//                    //如果下载文件成功，第一个参数为文件的绝对路径
-//                    sendSuccessResultCallback(file.getAbsolutePath(), callback);
-//                } catch (IOException e)
-//                {
-//                    sendFailedStringCallback(response.request(), e, callback);
-//                } finally
-//                {
-//                    try
-//                    {
-//                        if (is != null) is.close();
-//                    } catch (IOException e)
-//                    {
-//                    }
-//                    try
-//                    {
-//                        if (fos != null) fos.close();
-//                    } catch (IOException e)
-//                    {
-//                    }
-//                }
-//
-//            }
         });
     }
 
-    private String getFileName(String path) {
-        int separatorIndex = path.lastIndexOf("/");
-        return (separatorIndex < 0) ? path : path.substring(separatorIndex + 1, path.length());
+    private String getFileName(String url) {
+        int separatorIndex = url.lastIndexOf("/");
+        return (separatorIndex < 0) ? url : url.substring(separatorIndex + 1, url.length());
     }
 
     /**
@@ -258,15 +243,9 @@ public class OkHttpClientManager {
                 .build();
         Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Request request, IOException e)
-//            {
-//                setErrorResId(view, errorResId);
-//            }
-
             @Override
             public void onFailure(Call call, IOException e) {
-
+                setErrorResId(view, errorResId);
             }
 
             @Override
@@ -275,20 +254,16 @@ public class OkHttpClientManager {
             }
 
 //            @Override
-//            public void onResponse(Response response)
-//            {
+//            public void onResponse(Call call, Response response) {
 //                InputStream is = null;
-//                try
-//                {
+//                try {
 //                    is = response.body().byteStream();
 //                    ImageUtils.ImageSize actualImageSize = ImageUtils.getImageSize(is);
 //                    ImageUtils.ImageSize imageViewSize = ImageUtils.getImageViewSize(view);
 //                    int inSampleSize = ImageUtils.calculateInSampleSize(actualImageSize, imageViewSize);
-//                    try
-//                    {
+//                    try {
 //                        is.reset();
-//                    } catch (IOException e)
-//                    {
+//                    } catch (IOException e) {
 //                        response = _getAsyn(url);
 //                        is = response.body().byteStream();
 //                    }
@@ -297,27 +272,22 @@ public class OkHttpClientManager {
 //                    ops.inJustDecodeBounds = false;
 //                    ops.inSampleSize = inSampleSize;
 //                    final Bitmap bm = BitmapFactory.decodeStream(is, null, ops);
-//                    mDelivery.post(new Runnable()
-//                    {
+//                    mDelivery.post(new Runnable() {
 //                        @Override
-//                        public void run()
-//                        {
+//                        public void run() {
 //                            view.setImageBitmap(bm);
 //                        }
 //                    });
-//                } catch (Exception e)
-//                {
+//                } catch (Exception e) {
 //                    setErrorResId(view, errorResId);
 //
-//                } finally
-//                {
-//                    if (is != null) try
-//                    {
-//                        is.close();
-//                    } catch (IOException e)
-//                    {
-//                        e.printStackTrace();
-//                    }
+//                } finally {
+//                    if (is != null)
+//                        try {
+//                            is.close();
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 //                }
 //            }
         });
@@ -472,60 +442,46 @@ public class OkHttpClientManager {
 
     private void deliveryResult(final ResultCallback callback, Request request) {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
 
+            @Override
+            public void onFailure(final Call call, final IOException e) {
+                sendFailedStringCallback(call, e, callback);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) {
+                try {
+                    final String string = response.body().string();
+                    if (callback.mType == String.class) {
+                        sendSuccessResultCallback(string, callback);
+                    } else {
+                        Object o = mGson.fromJson(string, callback.mType);
+                        sendSuccessResultCallback(o, callback);
+                    }
+                } catch (IOException | JsonParseException e) {
+                    sendFailedStringCallback(call, e, callback);
+                }
 
             }
-
-//            @Override
-//            public void onFailure(final Request request, final IOException e) {
-//                sendFailedStringCallback(request, e, callback);
-//            }
-
-//            @Override
-//            public void onResponse(final Response response) {
-//                try {
-//                    final String string = response.body().string();
-//                    if (callback.mType == String.class) {
-//                        sendSuccessResultCallback(string, callback);
-//                    } else {
-//                        Object o = mGson.fromJson(string, callback.mType);
-//                        sendSuccessResultCallback(o, callback);
-//                    }
-//
-//
-//                } catch (IOException e) {
-//                    sendFailedStringCallback(response.request(), e, callback);
-//                } catch (com.google.gson.JsonParseException e)//Json解析的错误
-//                {
-//                    sendFailedStringCallback(response.request(), e, callback);
-//                }
-//
-//            }
         });
     }
 
-    private void sendFailedStringCallback(final Request request, final Exception e, final ResultCallback callback) {
+    private void sendFailedStringCallback(final Call call, final Exception e, final ResultCallback callback) {
         mDelivery.post(new Runnable() {
             @Override
             public void run() {
                 if (callback != null)
-                    callback.onError(request, e);
+                    callback.onError(call, e);
             }
         });
     }
 
-    private void sendSuccessResultCallback(final Object o, final ResultCallback callback) {
+    private <T> void sendSuccessResultCallback(final T t, final ResultCallback<T> callback) {
         mDelivery.post(new Runnable() {
             @Override
             public void run() {
                 if (callback != null) {
-                    callback.onResponse(o);
+                    callback.onResponse(t);
                 }
             }
         });
@@ -563,9 +519,9 @@ public class OkHttpClientManager {
             return $Gson$Types.canonicalize(parameterized.getActualTypeArguments()[0]);
         }
 
-        abstract void onError(Request request, Exception e);
+        abstract void onError(Call call, Exception e);
 
-        abstract void onResponse(Object o);
+        abstract void onResponse(T t);
     }
 
     private static class Param {
