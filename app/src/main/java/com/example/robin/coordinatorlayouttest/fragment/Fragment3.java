@@ -9,7 +9,9 @@ import com.example.robin.coordinatorlayouttest.engin.NetManager;
 import okhttp3.Call;
 import okhttp3.Response;
 
-
+/**
+ * 测试 OkHttp 简单封装的使用
+ */
 public class Fragment3 extends BaseFragment {
 
     private TextView mTv_3;

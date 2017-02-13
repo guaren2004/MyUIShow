@@ -264,7 +264,7 @@ public class OkHttpClientManager {
 //                    try {
 //                        is.reset();
 //                    } catch (IOException e) {
-//                        response = _getAsyn(url);
+//                        response = _getAsync(url);
 //                        is = response.body().byteStream();
 //                    }
 //

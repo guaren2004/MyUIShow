@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+    android:id="@+id/swipeToLoadLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="444Hello World!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+    <com.example.robin.coordinatorlayouttest.customview.CustomRefreshHeader
+        android:id="@+id/swipe_refresh_header"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"/>
 
-</RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/swipe_target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout
+        android:id="@+id/swipe_load_more_footer"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"/>
+
+</com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

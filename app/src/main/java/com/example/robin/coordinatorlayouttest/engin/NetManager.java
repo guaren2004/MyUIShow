@@ -1,13 +1,18 @@
 package com.example.robin.coordinatorlayouttest.engin;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.util.ArrayMap;
+import android.widget.ImageView;
 
+import com.example.robin.coordinatorlayouttest.utils.Util;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -156,6 +161,84 @@ public class NetManager {
                 } catch (JsonParseException | IOException e) {
                     toMainThreadOnError(call, response, e, baseCallback);
                 }
+            }
+        });
+    }
+
+    /**
+     * get 单纯根据 url 加载图片到指定 ImageView, 并设置默认图片的资源 ID
+     *
+     * @param view         指定 ImageView
+     * @param url          图片 Url 地址
+     * @param defaultResId 默认图片的资源 ID
+     * @param bmScale Bitmap 的缩放比例
+     */
+    public void loadImage(final ImageView view, final String url, final int defaultResId, final float bmScale) {
+        final Request request = initRequest(url, null, HttpMethodType.GET);
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                setDefaultView(view, defaultResId);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                InputStream is = null;
+                try {
+                    is = response.body().byteStream();
+                    try {
+                        is.reset();
+                    } catch (IOException e) {
+                        response = getSync(url);
+                        is = response.body().byteStream();
+                    }
+                    final Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    final int bmNewWidth = (int) (bitmap.getWidth() * bmScale);
+                    final int bmNewHeight = (int) (bitmap.getHeight() * bmScale);
+                    final Bitmap newBitmap = Util.scaleBitmap(bitmap, bmNewWidth, bmNewHeight, true);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.setImageBitmap(newBitmap);
+                        }
+                    });
+
+                } catch (Exception e) {
+                    setDefaultView(view, defaultResId);
+                } finally {
+                    if (is != null) {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 同步的 get 请求
+     */
+    private Response getSync(String url) throws IOException {
+        final Request request = initRequest(url, null, HttpMethodType.GET);
+        final Call call = mOkHttpClient.newCall(request);
+        return call.execute();
+    }
+
+    /**
+     * 设置默认图片
+     *
+     * @param view         ImageView
+     * @param defaultResId 资源 ID
+     */
+    private void setDefaultView(final ImageView view, final int defaultResId) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                view.setImageResource(defaultResId);
             }
         });
     }

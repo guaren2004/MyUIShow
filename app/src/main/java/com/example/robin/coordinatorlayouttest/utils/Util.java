@@ -3,18 +3,14 @@ package com.example.robin.coordinatorlayouttest.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.TabLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import java.lang.reflect.Field;
 
 public class Util {
 
@@ -32,6 +28,25 @@ public class Util {
         toast.show();
     }
 
+    /**
+     * 是一个比值 = densityDpi / 160, 其中 160 就是 mdpi 标准值
+     */
+    public static float getScreenDensity(Context context) {
+        final WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.density;
+    }
+
+    /**
+     * 就是常说的 dpi: dots per inch (一英寸多少个像素点)
+     */
+    public static int getScreenDensityDpi(Context context) {
+        final WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.densityDpi;
+    }
     /**
      * 获取屏幕宽度 (单位: px)
      */
@@ -55,7 +70,7 @@ public class Util {
     /**
      * 获取状态栏高度
      */
-    public static int getStatusBarHeight (Context context) {
+    public static int getStatusBarHeight(Context context) {
         int result = -1;
         final int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -66,9 +81,10 @@ public class Util {
 
     /**
      * 设置全透明状态栏
-     * @param activity 要设置全透明状态栏的 Activity
-     * @param drawerLayout 带有的 DrawerLayout(侧边导航栏开发)的 Activity 传过来的已经初始化(已经 findViewById)
-     *                     的 DrawerLayout 对象,如果没有 DrawerLayout ,传入 null
+     *
+     * @param activity            要设置全透明状态栏的 Activity
+     * @param drawerLayout        带有的 DrawerLayout(侧边导航栏开发)的 Activity 传过来的已经初始化(已经 findViewById)
+     *                            的 DrawerLayout 对象,如果没有 DrawerLayout ,传入 null
      * @param isFitsSystemWindows 设置当 drawerLayout == null 的时候,根布局是否向下移动一个状态栏
      */
     public static void setTransparentStatusBar(Activity activity, DrawerLayout drawerLayout, boolean isFitsSystemWindows) {
@@ -104,9 +120,10 @@ public class Util {
 
     /**
      * 设置半透明状态栏(5.0(21)以上才有半透明)
+     *
      * @param activity 要设置半透明状态栏的 Activity
      */
-    public static void setTranslucentStatusBar(Activity activity, DrawerLayout drawerLayout, boolean isFitsSystemWindows){
+    public static void setTranslucentStatusBar(Activity activity, DrawerLayout drawerLayout, boolean isFitsSystemWindows) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -117,42 +134,32 @@ public class Util {
         }
     }
 
-
-    public static void setIndicatorWidth(Context context, TabLayout tabs, int leftDip, int rightDip) {
-        Class<?> tabLayout = tabs.getClass();
-        Field tabStrip = null;
-        try {
-            tabStrip = tabLayout.getDeclaredField("mTabStrip");
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+    /**
+     * 缩放 Bitmap 图片
+     *
+     * @param bitmap    源图片
+     * @param newWidth  新宽度
+     * @param newHeight 新高度
+     * @param recycle   是否回收
+     * @return 缩放后的图片
+     */
+    public static Bitmap scaleBitmap(Bitmap bitmap, int newWidth, int newHeight, boolean recycle) {
+        if (isEmptyBitmap(bitmap)) {
+            return null;
         }
-
-        tabStrip.setAccessible(true);
-        LinearLayout ll_tab = null;
-        try {
-            ll_tab = (LinearLayout) tabStrip.get(tabs);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        final Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, recycle);
+        if (recycle && !bitmap.isRecycled()) {
+            bitmap.recycle();
         }
-
-        int left = (int) (getDisplayMetrics(context).density * leftDip);
-        int right = (int) (getDisplayMetrics(context).density * rightDip);
-
-        for (int i = 0; i < ll_tab.getChildCount(); i++) {
-            View child = ll_tab.getChildAt(i);
-            child.setPadding(0, 0, 0, 0);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-            params.leftMargin = left;
-            params.rightMargin = right;
-            child.setLayoutParams(params);
-            child.invalidate();
-        }
+        return scaledBitmap;
     }
 
-    private static DisplayMetrics getDisplayMetrics(Context context) {
-        final WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        return displayMetrics;
+    /**
+     * 判断 Bitmap 是否为空
+     *
+     * @param bitmap 源图片
+     */
+    private static boolean isEmptyBitmap(Bitmap bitmap) {
+        return bitmap == null || bitmap.getWidth() == 0 || bitmap.getHeight() == 0;
     }
 }
