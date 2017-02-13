@@ -31,5 +31,11 @@ RecyclerView + SwipeRefreshLayout 实现下拉刷新
 
 RecyclerView.Adapter 的写法以及上拉加载更多的实现
 
+以及 RecyclerView + SwipToLoadLayout 实现自定义下拉刷新的Header和上拉加载更多的Footer
+
+OkHttp 的简单封装
+
+还有 OkHttp + Glide + Glide-Transformation 对图片加载和处理
+
 ......等等
  
