@@ -7,18 +7,19 @@
 
     <com.example.robin.coordinatorlayouttest.customview.CustomRefreshHeader
         android:id="@+id/swipe_refresh_header"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/swipe_target"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout
+    <com.example.robin.coordinatorlayouttest.customview.CustomLoadMoreFooter
         android:id="@+id/swipe_load_more_footer"
         android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:gravity="center"/>
 
 </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

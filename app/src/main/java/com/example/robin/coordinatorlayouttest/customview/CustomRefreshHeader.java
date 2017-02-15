@@ -56,26 +56,34 @@ public class CustomRefreshHeader extends LinearLayout implements SwipeRefreshTri
 
     @Override
     public void onPrepare() {
+
     }
 
     /**
      * 移动的时候回调
+     * 注意1: 需要判断 !isComplete , 否则在显示"加载完成"后又会显示一遍"下拉刷新"
+     * 注意2: 在判断 yScrolled < getHeight() 的时候, 不能写成 <= , 如果写成 <= , 释放后会判断两次,
+     * 也就是说会在释放后显示一遍"下拉刷新"再显示"加载中..."
      *
-     * @param i 偏移距离: 拉出来的距离
+     * @param yScrolled  偏移距离: 拉出来的距离
+     * @param isComplete 是否完成
      */
     @Override
-    public void onMove(int i, boolean b, boolean b1) {
-        if (i <= getHeight()) {
-            progressBar.setVisibility(View.GONE);
-            textFooter.setText("下拉刷新");
-        } else {
-            progressBar.setVisibility(View.GONE);
-            textFooter.setText("释放加载更多");
+    public void onMove(int yScrolled, boolean isComplete, boolean automatic) {
+        if (!isComplete) {
+            if (yScrolled < getHeight()) {
+                progressBar.setVisibility(View.GONE);
+                textFooter.setText("下拉刷新");
+            } else {
+                progressBar.setVisibility(View.GONE);
+                textFooter.setText("释放加载更多");
+            }
         }
     }
 
     @Override
     public void onRelease() {
+
     }
 
     @Override
