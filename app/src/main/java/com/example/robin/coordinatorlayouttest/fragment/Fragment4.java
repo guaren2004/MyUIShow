@@ -14,7 +14,7 @@ import com.example.robin.coordinatorlayouttest.adapter.WaterfallRVAdapter;
  * 测试 SwipeToLoadLayout 用法
  * 以及 封装 OkHttp + RecyclerView 加载图片实现瀑布流
  */
-public class Fragment4 extends BaseFragment {
+public class Fragment4 extends BaseFragment implements OnRefreshListener, OnLoadMoreListener {
 
     private Handler mHandler;
     private String[] imageUrls;
@@ -46,28 +46,38 @@ public class Fragment4 extends BaseFragment {
         final WaterfallRVAdapter adapter = new WaterfallRVAdapter(imageUrls, getActivity(), this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setHasFixedSize(true);
-        mSwipeToLoadLayout.setOnRefreshListener(new OnRefreshListener() {
+        mSwipeToLoadLayout.setOnRefreshListener(this);
+        mSwipeToLoadLayout.setOnLoadMoreListener(this);
+        autoRefresh();
+    }
+
+    @Override
+    public void onRefresh() {
+        mHandler.postDelayed(new Runnable() {
             @Override
-            public void onRefresh() {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // do something
-                        mSwipeToLoadLayout.setRefreshing(false);
-                    }
-                }, 2000);
+            public void run() {
+                // do something
+                mSwipeToLoadLayout.setRefreshing(false);
             }
-        });
-        mSwipeToLoadLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+        }, 2000);
+    }
+
+    @Override
+    public void onLoadMore() {
+        mHandler.postDelayed(new Runnable() {
             @Override
-            public void onLoadMore() {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // do something
-                        mSwipeToLoadLayout.setLoadingMore(false);
-                    }
-                }, 2000);
+            public void run() {
+                // do something
+                mSwipeToLoadLayout.setLoadingMore(false);
+            }
+        }, 2000);
+    }
+
+    private void autoRefresh() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeToLoadLayout.setRefreshing(true);
             }
         });
     }
