@@ -39,7 +39,7 @@ public class NetManager {
     // OkHttpClient 在这里初始化, 也为单例模式
     private NetManager() {
         mOkHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build();

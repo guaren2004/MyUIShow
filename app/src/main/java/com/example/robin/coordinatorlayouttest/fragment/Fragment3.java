@@ -5,6 +5,7 @@ import android.widget.TextView;
 import com.example.robin.coordinatorlayouttest.R;
 import com.example.robin.coordinatorlayouttest.engin.BaseCallback;
 import com.example.robin.coordinatorlayouttest.engin.NetManager;
+import com.example.robin.coordinatorlayouttest.utils.Util;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -40,6 +41,7 @@ public class Fragment3 extends BaseFragment {
             @Override
             public void onFailure(Call call, Exception e) {
                 System.out.println(TAG + "onFailure");
+                Util.showToast(getActivity(), "请求失败, 请检查是否连接到网络!");
             }
 
             @Override
