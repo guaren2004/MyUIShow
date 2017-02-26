@@ -19,6 +19,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // 之前设置的 android:windowBackground 图片还在内存中, 用这个方法去掉
+        getWindow().setBackgroundDrawable(null);
         if (context != null) {
             context = null;
         }

@@ -227,4 +227,13 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 这个应用在加载了很多图片的情况下, 内存占用非常大
+        // 在退出应用的时候杀死进程, 清理掉内存中多余的资源占用
+        // 否则在退出后马上又启动应用, 将出现 out of memory 异常
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }
