@@ -27,15 +27,15 @@ import okhttp3.Response;
 
 /**
  * 封装 OkHttp 的类
+ * (采用了静态内部类的单例模式)
  */
 public class NetManager {
 
-    private static NetManager instance = null; // 单例模式
     private OkHttpClient mOkHttpClient;
     private Gson mGson;
     private Handler mHandler;
 
-    // 单例模式: 私有化构造函数, 并在里面做一些初始化操作
+    // 单例模式 步骤一: 私有化构造函数, 并在里面做一些初始化操作
     // OkHttpClient 在这里初始化, 也为单例模式
     private NetManager() {
         mOkHttpClient = new OkHttpClient.Builder()
@@ -52,16 +52,14 @@ public class NetManager {
         mHandler = new Handler(Looper.getMainLooper());
     }
 
-    // 单例模式: 外部获取实例的唯一方法
+    // 单例模式 步骤二: 静态内部类创建实例
+    private static class NetManagerHolder {
+        private static final NetManager instance = new NetManager();
+    }
+
+    // 单例模式 步骤三: 外部获取实例的唯一方法
     public static NetManager getInstance() {
-        if (instance == null) {
-            synchronized (NetManager.class) {
-                if (instance == null) {
-                    instance = new NetManager();
-                }
-            }
-        }
-        return instance;
+        return NetManagerHolder.instance;
     }
 
     /**
