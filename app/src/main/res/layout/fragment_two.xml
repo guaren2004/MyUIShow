@@ -1,13 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
-    <ImageView
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"/>
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_add"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_chooseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择日期"/>
+
+        <Button
+            android:id="@+id/btn_chooseTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择时间"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我儿子叫什么名字?"
+            android:textAppearance="?android:textAppearanceLarge"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A. 杨洋洋"/>
+
+            <RadioButton
+                android:id="@+id/rb_B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B. 杨洋"/>
+
+            <RadioButton
+                android:id="@+id/rb_C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C. 杨竣皓"/>
+
+            <RadioButton
+                android:id="@+id/rb_D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D. 杨宝贝"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提交"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你喜欢吃什么食物?"
+            android:textAppearance="?android:textAppearanceLarge"/>
+
+        <CheckBox
+            android:id="@+id/cb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="肉食 "/>
+
+        <CheckBox
+            android:id="@+id/cb_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="面食 "/>
+
+        <CheckBox
+            android:id="@+id/cb_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="蔬菜 "/>
+
+        <CheckBox
+            android:id="@+id/cb_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="水果"/>
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="result"/>
+
+    </LinearLayout>
+</ScrollView>
