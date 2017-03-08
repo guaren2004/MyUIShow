@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:robin="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/tv_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="555Hello World!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"/>
+        android:text="fragment_5"/>
 
-</RelativeLayout>
+    <com.example.robin.coordinatorlayouttest.customview.MyCustomView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        robin:view_color="@color/colorAccent"/>
+
+    <com.example.robin.coordinatorlayouttest.customview.MyCircleView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        robin:view_bg="@color/colorBlack"
+        robin:view_radius="100dp"/>
+
+</LinearLayout>

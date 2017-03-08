@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--这里的 styleable 的 name 最好和自定义view 的名字一样, 方便使用-->
+    <declare-styleable name="MyCustomView">
+        <attr name="view_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyCircleView">
+        <attr name="view_bg" format="color"/>
+        <attr name="view_radius" format="dimension"/>
+    </declare-styleable>
+</resources>
