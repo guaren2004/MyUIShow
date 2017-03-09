@@ -12,15 +12,20 @@
         android:layout_height="wrap_content"
         android:text="fragment_5"/>
 
+    <View
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/cardview_dark_background"/>
+
     <com.example.robin.coordinatorlayouttest.customview.MyCustomView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        robin:view_color="@color/colorAccent"/>
+        robin:view_bg="@color/colorAccent"/>
 
     <com.example.robin.coordinatorlayouttest.customview.MyCircleView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        robin:view_bg="@color/colorBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        robin:view_color="@color/colorPrimary"
         robin:view_radius="100dp"/>
 
 </LinearLayout>

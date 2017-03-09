@@ -21,7 +21,7 @@ public class MyCustomView extends View {
         super(context, attrs);
         // 这里的方法将属性关联到这个自定义view上
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyCustomView);
-        final int color = typedArray.getColor(R.styleable.MyCustomView_view_color, Color.YELLOW);
+        final int color = typedArray.getColor(R.styleable.MyCustomView_view_bg, Color.YELLOW);
         setBackgroundColor(color);
         typedArray.recycle();
     }
