@@ -44,11 +44,23 @@ public class Fragment4 extends BaseFragment implements OnRefreshListener, OnLoad
 //        final NetManager netManager = NetManager.getInstance();
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         final WaterfallRVAdapter adapter = new WaterfallRVAdapter(imageUrls, getActivity(), this);
-        mRecyclerView.setAdapter(adapter);
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setAdapter(adapter);
         mSwipeToLoadLayout.setOnRefreshListener(this);
         mSwipeToLoadLayout.setOnLoadMoreListener(this);
         autoRefresh();
+
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    Glide.with(Fragment4.this).resumeRequests();
+//                } else {
+//                    Glide.with(Fragment4.this).pauseRequests();
+//                }
+//            }
+//        });
     }
 
     @Override

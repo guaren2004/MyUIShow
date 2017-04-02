@@ -1,6 +1,7 @@
 package com.example.robin.coordinatorlayouttest.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.robin.coordinatorlayouttest.R;
-import com.example.robin.coordinatorlayouttest.engin.NetManager;
+import com.example.robin.coordinatorlayouttest.activity.ShowActivity;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -21,14 +23,7 @@ public class WaterfallRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private String[] imageUrls;
     private Context context;
-    private NetManager netManager;
     private Fragment fragment;
-
-    public WaterfallRVAdapter(String[] imageUrls, Context context, NetManager netManager) {
-        this.imageUrls = imageUrls;
-        this.context = context;
-        this.netManager = netManager;
-    }
 
     public WaterfallRVAdapter(String[] imageUrls, Context context, Fragment fragment) {
         this.imageUrls = imageUrls;
@@ -56,14 +51,27 @@ public class WaterfallRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 //        final DrawableTypeRequest<String> request = requestManager.load(url);
 //        final DrawableRequestBuilder<String> builder = request.error(R.mipmap.ic_launcher);
 //        builder.into(mHolder.img_item);
+
         Glide.with(fragment)
                 .load(url)
                 .skipMemoryCache(true) // 跳过内存缓存
-                .placeholder(R.mipmap.ic_launcher) // 占位图片
+                .diskCacheStrategy(DiskCacheStrategy.ALL) // 即缓存了 imageView 适配的图片,又缓存了原图
                 .dontAnimate() // 取消动画
-                .thumbnail(0.1f) // 请求给定系数(0到1之间)的缩略图
+                .placeholder(R.mipmap.ic_launcher) // 占位图片
+//                .error(R.mipmap.ic_launcher)
+//                .thumbnail(0.1f) // 请求给定系数(0到1之间)的缩略图
+                .override(300, 300) // 指定加载资源的宽和高的像素
                 .bitmapTransform(new CropCircleTransformation(context)) // 圆形图
                 .into(mHolder.img_item);
+
+        mHolder.img_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(fragment.getActivity(), ShowActivity.class);
+                intent.putExtra("url", url);
+                fragment.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -24,18 +24,16 @@
             </intent-filter>
         </activity>
 
-        <!--GuideActivity-->
+        <!-- GuideActivity -->
         <activity
             android:name=".activity.GuideActivity"
             android:theme="@style/AppTheme.FullScreen">
-
         </activity>
 
         <!-- MainActivity -->
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
         <!-- BaseActivity -->
@@ -64,17 +62,21 @@
         <activity
             android:name=".activity.Main3Activity"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <!-- ViewDragHelperActivity -->
         <activity
             android:name=".activity.ViewDragHelperActivity"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".activity.ShowActivity">
         </activity>
     </application>
 
